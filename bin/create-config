@@ -105,12 +105,14 @@ function createConfig() {
 
 function getEmailConfig() {
   return {
-    transport: 'SMTP',
-    options: {
-      service: 'SendGrid',
-      auth: {
-        user: process.env.SENDGRID_LOGIN,
-        pass: process.env.SENDGRID_PASSWORD
+    mail: {
+      transport: 'SMTP',
+      options: {
+        service: 'SendGrid',
+        auth: {
+          user: process.env.SENDGRID_LOGIN,
+          pass: process.env.SENDGRID_PASSWORD
+        }
       }
     }
   }
