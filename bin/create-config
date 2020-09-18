@@ -16,14 +16,14 @@ function createConfig() {
     storage = {
       active: 's3',
       's3': {
-        accessKeyId:     process.env.S3_ACCESS_KEY_ID,
+        accessKeyId: process.env.S3_ACCESS_KEY_ID,
         secretAccessKey: process.env.S3_ACCESS_SECRET_KEY,
-        bucket:          process.env.S3_BUCKET_NAME,
-        region:          process.env.S3_BUCKET_REGION,
-        assetHost:       process.env.S3_ASSET_HOST_URL
+        bucket: process.env.S3_BUCKET_NAME,
+        region: process.env.S3_BUCKET_REGION,
+        assetHost: process.env.S3_ASSET_HOST_URL
       }
     }
-  } else if (!!process.env.WEBDAV_SERVER_URL){
+  } else if (!!process.env.WEBDAV_SERVER_URL) {
     fileStorage = true
     storage = {
       'active': 'webdav',
@@ -35,11 +35,11 @@ function createConfig() {
     storage = {
       active: 's3',
       's3': {
-        accessKeyId:     process.env.BUCKETEER_AWS_ACCESS_KEY_ID,
+        accessKeyId: process.env.BUCKETEER_AWS_ACCESS_KEY_ID,
         secretAccessKey: process.env.BUCKETEER_AWS_SECRET_ACCESS_KEY,
-        bucket:          process.env.BUCKETEER_BUCKET_NAME,
-        region:          process.env.S3_BUCKET_REGION,
-        assetHost:       process.env.S3_ASSET_HOST_URL
+        bucket: process.env.BUCKETEER_BUCKET_NAME,
+        region: process.env.S3_BUCKET_REGION,
+        assetHost: process.env.S3_ASSET_HOST_URL
       }
     }
   } else if (!!process.env.CLOUDINARY_URL) {
@@ -100,7 +100,20 @@ function createConfig() {
     }
   };
 
-  return config;
+  return Object.assign({}, config, getEmailConfig());
+}
+
+function getEmailConfig() {
+  return {
+    transport: 'SMTP',
+    options: {
+      service: 'SendGrid',
+      auth: {
+        user: process.env.SENDGRID_LOGIN,
+        pass: process.env.SENDGRID_PASSWORD
+      }
+    }
+  }
 }
 
 function getMysqlConfig(connectionUrl) {
