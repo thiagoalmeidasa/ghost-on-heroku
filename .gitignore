@@ -8,3 +8,6 @@ content/data/ghost-local.db
 
 content/themes/*
 !content/themes/.gitkeep
+
+yarn.lock
+package-lock.json
