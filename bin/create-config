@@ -6,7 +6,6 @@ var path = require('path');
 var url = require('url');
 
 var envValues = require('./common/env-values');
-const { config } = require('process');
 var appRoot = path.join(__dirname, '..');
 
 function createConfig() {
