@@ -6,6 +6,7 @@ var path = require('path');
 var url = require('url');
 
 var envValues = require('./common/env-values');
+const { config } = require('process');
 var appRoot = path.join(__dirname, '..');
 
 function createConfig() {
@@ -73,16 +74,7 @@ function createConfig() {
       level: "info",
       transports: ["stdout"]
     },
-    mail: {
-      transport: 'SMTP',
-      options: {
-        service: 'Mailgun',
-        auth: {
-          user: process.env.MAILGUN_SMTP_LOGIN,
-          pass: process.env.MAILGUN_SMTP_PASSWORD
-        }
-      }
-    },
+    mail: getEmailConfig(),
     fileStorage: fileStorage,
     storage: storage,
     database: {
@@ -100,19 +92,43 @@ function createConfig() {
     }
   };
 
-  return Object.assign({}, config, getEmailConfig());
+  return config;
 }
 
 function getEmailConfig() {
-  return {
-    mail: {
+  if (process.env.SENDGRID_LOGIN) {
+    return {
+      mail: {
+        transport: 'SMTP',
+        options: {
+          service: 'SendGrid',
+          auth: {
+            user: process.env.SENDGRID_LOGIN,
+            pass: process.env.SENDGRID_PASSWORD
+          }
+        }
+      }
+    }
+  }
+  else if (process.env.MAILGUN_SMTP_LOGIN) {
+    return {
       transport: 'SMTP',
       options: {
-        service: 'SendGrid',
+        service: 'Mailgun',
         auth: {
-          user: process.env.SENDGRID_LOGIN,
-          pass: process.env.SENDGRID_PASSWORD
+          user: process.env.MAILGUN_SMTP_LOGIN,
+          pass: process.env.MAILGUN_SMTP_PASSWORD
         }
+      }
+    }
+  }
+  return {
+    transport: 'SMTP',
+    options: {
+      service: '',
+      auth: {
+        user: '',
+        pass: ''
       }
     }
   }

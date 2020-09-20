@@ -63,7 +63,7 @@
     },
     "SENDGRID_PASSWORD": {
       "description": "Send grid password",
-      "required": false
+      "required": true
     }
   }
 }
