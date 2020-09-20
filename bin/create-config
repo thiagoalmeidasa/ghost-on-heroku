@@ -74,7 +74,7 @@ function createConfig() {
       level: "info",
       transports: ["stdout"]
     },
-    mail: getEmailConfig(),
+    mail: {},
     fileStorage: fileStorage,
     storage: storage,
     database: {
@@ -91,8 +91,8 @@ function createConfig() {
       contentPath: path.join(appRoot, '/content/')
     }
   };
-
-  return config;
+  return Object.assign({}, config, getEmailConfig());
+  //return config;
 }
 
 function getEmailConfig() {
