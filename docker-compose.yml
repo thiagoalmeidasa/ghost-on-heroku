@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: MYG2_CM1htwZ8G
+    ports:
+      - "3306:3306"
+    volumes:
+      - /home/radmin/mysql123-volume:/var/lib/mysql
+    networks:
+      - mysql-compose-network
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    networks:
+      - mysql-compose-network
+    depends_on:
+      - mysql
+
+  ghost:
+    #image: ghost:latest
+    #image: rmauro/ghost:latest
+    build: .
+    restart: always
+    ports:
+      - 8081:2054
+    environment:
+      url: ${url}
+      APP_PUBLIC_URL: ${APP_PUBLIC_URL}
+      MYSQL_DATABASE_URL: ${MYSQL_DATABASE_URL}
+      CLOUDINARY_URL: ${CLOUDINARY_URL}
+      SENDGRID_LOGIN: ${SENDGRID_LOGIN}
+      SENDGRID_PASSWORD: ${SENDGRID_PASSWORD}
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
+    #volumes:
+    #  - /home/radmin/dk-ghost-3:/var/lib/ghost/content
+    networks:
+      - mysql-compose-network
+    depends_on:
+      - mysql
+
+networks: 
+  mysql-compose-network:
+    driver: bridge

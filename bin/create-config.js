@@ -8,6 +8,8 @@ var url = require('url');
 var envValues = require('./common/env-values');
 var appRoot = path.join(__dirname, '..');
 
+console.log('starting create-config.js', appRoot)
+
 function createConfig() {
   var fileStorage, storage;
 
@@ -164,4 +166,10 @@ function getMysqlConfig(connectionUrl) {
 }
 
 var configContents = JSON.stringify(createConfig(), null, 2);
+
+console.log('content of config', configContents)
+console.log('path of config', path.join(appRoot, 'config.production.json'))
+
 fs.writeFileSync(path.join(appRoot, 'config.production.json'), configContents);
+
+//return configContents;

@@ -1,26 +1,62 @@
 {
-  "url": "http://localhost:2368/",
-  "server": {
-    "port": 2368,
-    "host": "127.0.0.1"
-  },
-  "database": {
-    "client": "sqlite3",
-    "connection": {
-      "filename": "content/data/ghost-local.db"
+    "url": "http://localhost:8081",
+    "logging": {
+        "level": "info",
+        "transports": [
+            "stdout"
+        ]
+    },
+    "mail": {
+        "transport": "SMTP",
+        "options": {
+            "service": "SendGrid",
+            "auth": {
+                "user": "",
+                "pass": ""
+            }
+        }
+    },
+    "fileStorage": true,
+    "storage": {
+        "active": "ghost-storage-cloudinary",
+        "ghost-storage-cloudinary": {
+            "useDatedFolder": false,
+            "upload": {
+                "use_filename": true,
+                "unique_filename": false,
+                "overwrite": false,
+                "folder": "ghost-blog-images",
+                "tags": [
+                    "blog"
+                ]
+            },
+            "fetch": {
+                "quality": "auto",
+                "secure": true,
+                "cdn_subdomain": true
+            }
+        }
+    },
+    "database": {
+        "client": "mysql",
+        "connection": {
+            "host": "",
+            "port": "3306",
+            "user": "",
+            "password": "",
+            "database": ""
+        },
+        "pool": {
+            "min": 0,
+            "max": 10
+        },
+        "debug": false
+    },
+    "server": {
+        "host": "0.0.0.0",
+        "port": "2054"
+    },
+    "paths": {
+        "contentPath": "/app/content/"
     }
-  },
-  "mail": {
-    "transport": "Direct"
-  },
-  "logging": {
-    "transports": [
-      "file",
-      "stdout"
-    ]
-  },
-  "process": "local",
-  "paths": {
-    "contentPath": "content"
   }
-}
