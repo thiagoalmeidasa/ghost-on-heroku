@@ -8,7 +8,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - /home/radmin/mysql-volume:/var/lib/mysql
+      - /home/radmin/mysql-volume-1:/var/lib/mysql
     networks:
       - mysql-compose-network
 
@@ -23,8 +23,8 @@ services:
 
   ghost:
     #image: ghost:latest
-    #image: rmauro/ghost:latest
-    build: .
+    image: rmaurodev/ghost:1
+    #build: .
     restart: always
     ports:
       - 80:2054
@@ -38,7 +38,7 @@ services:
       NODE_ENV: ${NODE_ENV}
       PORT: ${PORT}
     volumes:
-      - /home/radmin/ghost-volume:/var/lib/ghost/content
+      - /home/radmin/ghost-volume:/app/content
     networks:
       - mysql-compose-network
     depends_on:
