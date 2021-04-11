@@ -4,11 +4,11 @@ services:
   mysql:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: MYG2_CM1htwZ8G
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
-      - /home/radmin/mysql123-volume:/var/lib/mysql
+      - /home/radmin/mysql-volume:/var/lib/mysql
     networks:
       - mysql-compose-network
 
@@ -27,7 +27,7 @@ services:
     build: .
     restart: always
     ports:
-      - 8081:2054
+      - 80:2054
     environment:
       url: ${url}
       APP_PUBLIC_URL: ${APP_PUBLIC_URL}
@@ -37,8 +37,8 @@ services:
       SENDGRID_PASSWORD: ${SENDGRID_PASSWORD}
       NODE_ENV: ${NODE_ENV}
       PORT: ${PORT}
-    #volumes:
-    #  - /home/radmin/dk-ghost-3:/var/lib/ghost/content
+    volumes:
+      - /home/radmin/ghost-volume:/var/lib/ghost/content
     networks:
       - mysql-compose-network
     depends_on:

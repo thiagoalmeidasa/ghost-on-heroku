@@ -21,7 +21,7 @@ RUN mv node_modules/ghost-storage-cloudinary ./content/adapters/storage/ghost-st
 
 RUN cp -Rf node_modules/casper content/themes
 
-RUN rm config.production.json
+#RUN rm config.production.json
 
 EXPOSE 8080
 #CMD node ./bin/create-config
