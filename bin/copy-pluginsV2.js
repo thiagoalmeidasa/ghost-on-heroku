@@ -11,9 +11,9 @@ function copyFolderRecursiveSync(srcDir, destDir) {
     });
 }
 
-console.log('starting copy of ghost-storage-cloudinary')
-copyFolderRecursiveSync('./node_modules/ghost-storage-cloudinary', './content/adapters/storage/ghost-storage-cloudinary')
-console.log('copied ghost-storage-cloudinary')
+//console.log('starting copy of ghost-storage-cloudinary')
+//copyFolderRecursiveSync('./node_modules/ghost-storage-cloudinary', './content/adapters/storage/ghost-storage-cloudinary')
+//console.log('copied ghost-storage-cloudinary')
 
 console.log('starting copy of casper theme')
 copyFolderRecursiveSync('./node_modules/casper', './content/themes/casper')
