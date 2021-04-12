@@ -21,7 +21,30 @@ services:
     depends_on:
       - mysql
 
-  ghost:
+  ghostsab:
+    #image: ghost:latest
+    image: rmaurodev/ghost:1
+    #build: .
+    restart: always
+    ports:
+      - 8080:2054
+    environment:
+      url: ${APP_PUBLIC_URL_SAB}
+      APP_PUBLIC_URL: ${APP_PUBLIC_URL_SAB}
+      MYSQL_DATABASE_URL: ${MYSQL_DATABASE_URL_SAB}
+      CLOUDINARY_URL: ${CLOUDINARY_URL_SAB}
+      SENDGRID_LOGIN: ${SENDGRID_LOGIN}
+      SENDGRID_PASSWORD: ${SENDGRID_PASSWORD}
+      NODE_ENV: ${NODE_ENV_SAB}
+      PORT: 2054
+    volumes:
+      - /home/radmin/ghost-volume-sab:/app/content/themes
+    networks:
+      - mysql-compose-network
+    depends_on:
+      - mysql
+  
+  ghostrmauro:
     #image: ghost:latest
     image: rmaurodev/ghost:1
     #build: .
@@ -29,16 +52,16 @@ services:
     ports:
       - 80:2054
     environment:
-      url: ${url}
-      APP_PUBLIC_URL: ${APP_PUBLIC_URL}
-      MYSQL_DATABASE_URL: ${MYSQL_DATABASE_URL}
-      CLOUDINARY_URL: ${CLOUDINARY_URL}
+      url: ${APP_PUBLIC_URL_RMAURO}
+      APP_PUBLIC_URL: ${APP_PUBLIC_URL_RMAURO}
+      MYSQL_DATABASE_URL: ${MYSQL_DATABASE_URL_RMAURO}
+      CLOUDINARY_URL: ${CLOUDINARY_URL_RMAURO}
       SENDGRID_LOGIN: ${SENDGRID_LOGIN}
       SENDGRID_PASSWORD: ${SENDGRID_PASSWORD}
       NODE_ENV: ${NODE_ENV}
-      PORT: ${PORT}
+      PORT: 2054
     volumes:
-      - /home/radmin/ghost-volume:/app/content
+      - /home/radmin/ghost-volume-rmauro:/app/content/themes
     networks:
       - mysql-compose-network
     depends_on:
