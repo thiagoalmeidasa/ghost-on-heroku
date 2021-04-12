@@ -17,9 +17,8 @@ RUN npm install
 COPY . .
 
 RUN rm -rf ./content/adapters/storage/ghost-storage-cloudinary
-RUN mv node_modules/ghost-storage-cloudinary ./content/adapters/storage/ghost-storage-cloudinary
-
-RUN cp -Rf node_modules/casper content/themes
+#RUN mv node_modules/ghost-storage-cloudinary ./content/adapters/storage/ghost-storage-cloudinary
+#RUN cp -Rf node_modules/casper content/themes
 
 #RUN rm config.production.json
 

@@ -1,5 +1,6 @@
 var path = require('path');
 
+const copy = require('./bin/copy-pluginsV2');
 const config = require('./bin/create-config');
 
 var envValues = require('./bin/common/env-values');
