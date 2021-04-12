@@ -27,7 +27,7 @@ services:
     #build: .
     restart: always
     ports:
-      - 8080:2054
+      - 8081:2054
     environment:
       url: ${APP_PUBLIC_URL_SAB}
       APP_PUBLIC_URL: ${APP_PUBLIC_URL_SAB}
